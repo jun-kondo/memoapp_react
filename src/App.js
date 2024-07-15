@@ -2,10 +2,8 @@ import { Fragment, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
-  //   一覧/編集はグローバルStateで管理する
   return (
     <>
-      <h1>一覧/編集</h1>
       <MemoTable memos={MEMOS} />
     </>
   );
@@ -17,10 +15,11 @@ function MemoTable({ memos }) {
     content: "",
   };
   const [memoList, setMemoList] = useState(memos);
-  const [memoId, setMemoId] = useState(initialData.id);
+  const [memoId, setMemoId] = useState(null);
+  // const [memoId, setMemoId] = useState(initialData.id);
   const [isEditable, setIsEditable] = useState(false);
-  const selectedMemo =
-    memoList.find((memo) => memo.id === memoId) || initialData;
+  const selectedMemo = memoList.find((memo) => memo.id === memoId);
+  // memoList.find((memo) => memo.id === memoId) || initialData;
 
   const handleAddMemo = () => {
     const newMemo = {
@@ -30,6 +29,7 @@ function MemoTable({ memos }) {
     setMemoList([...memoList, newMemo]);
     //     編集ステータスをオンにする
     setMemoId(newMemo.id);
+    setIsEditable(true);
   };
 
   const handleEditMemo = (id, text) => {
@@ -42,41 +42,45 @@ function MemoTable({ memos }) {
         }
       }),
     );
+    setIsEditable(false);
   };
 
   const handleDeleteMemo = (id) => {
     setMemoList(memoList.filter((memo) => memo.id !== id));
     // IDの値を初期化しないとバグる
-    setMemoId(initialData.id);
+    // setMemoId(initialData.id);
+    setIsEditable(false);
   };
 
   return (
     <>
+      <h1>{isEditable ? "編集" : "一覧"}</h1>
       <MemoList
         memos={memoList}
-        // memoId={memoId}
         onSelect={(id) => setMemoId(id)}
-        onEditable={() => setIsEditable(true)}
+        onEditable={(boolean) => setIsEditable(boolean)}
         onAdd={handleAddMemo}
       />
-      <MemoEditTable
-        key={memoId}
-        selectedMemo={selectedMemo}
-        onEdit={handleEditMemo}
-        onDelete={handleDeleteMemo}
-      />
+      {isEditable && (
+        <MemoEditTable
+          key={memoId}
+          selectedMemo={selectedMemo}
+          onEdit={handleEditMemo}
+          onDelete={handleDeleteMemo}
+        />
+      )}
     </>
   );
 }
 
-function MemoList({ memos, selectedMemo, onSelect, onEditable, onAdd }) {
+function MemoList({ memos, onSelect, onEditable, onAdd }) {
   return (
     <section className="memo-list">
       <ul>
         {memos.map((memo) => (
           <li key={memo.id}>
             <a
-              href={"#"}
+              href="#"
               onClick={() => {
                 onSelect(memo.id);
                 onEditable(true);
@@ -88,7 +92,7 @@ function MemoList({ memos, selectedMemo, onSelect, onEditable, onAdd }) {
         ))}
         <li>
           <a
-            href={"#"}
+            href="#"
             onClick={() => {
               onAdd();
             }}
@@ -101,19 +105,12 @@ function MemoList({ memos, selectedMemo, onSelect, onEditable, onAdd }) {
   );
 }
 
-function MemoRow({ title }) {
-  //   タイトルをクリックすると編集モードに以降
-}
-
 function MemoEditTable({ selectedMemo, onEdit, onDelete }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(selectedMemo.content);
   return (
     <section className="edit-table">
       <form>
-        <textarea
-          value={selectedMemo.content}
-          onChange={(e) => setText(e.target.value)}
-        />
+        <textarea value={text} onChange={(e) => setText(e.target.value)} />
         <br />
         <button
           onClick={() => {
