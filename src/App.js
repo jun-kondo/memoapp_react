@@ -3,7 +3,8 @@ import MemoTable from "./components/memo-table";
 export default function App() {
   return (
     <>
-      <MemoTable memos={MEMOS} />
+      {/*<MemoTable memos={MEMOS} />*/}
+      <MemoTable />
     </>
   );
 }
