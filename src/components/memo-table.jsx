@@ -32,8 +32,7 @@ export default function MemoTable() {
     const unsub = onSnapshot(q, (querySnapshot) => {
       // docChange関数で追加、更新、削除で処理を分岐させる
       setMemoList(
-        querySnapshot.docs.map((doc) => doc.data()),
-        // querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
+        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
       );
     });
     return () => {
@@ -44,10 +43,14 @@ export default function MemoTable() {
   const handleAddMemo = async () => {
     const newMemoId = uuidv4();
     try {
-      await setDoc(doc(db, "memos", newMemoId), {
-        content: "新規メモ",
-        createdAt: new Date().getTime(),
-      });
+      await setDoc(
+        doc(db, "memos", newMemoId),
+        {
+          content: "新規メモ",
+          createdAt: new Date().getTime(),
+        },
+        { merge: true },
+      );
     } catch (e) {
       console.error(e);
     }
