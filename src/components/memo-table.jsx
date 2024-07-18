@@ -15,22 +15,15 @@ import {
 } from "firebase/firestore";
 
 export default function MemoTable() {
-  const initialData = {
-    id: uuidv4(),
-    content: "",
-  };
   const [memoList, setMemoList] = useState([]);
   const [memoId, setMemoId] = useState(null);
-  // const [memoId, setMemoId] = useState(initialData.id);
   const [isEditable, setIsEditable] = useState(false);
   const selectedMemo = memoList.find((memo) => memo.id === memoId);
-  // memoList.find((memo) => memo.id === memoId) || initialData;
 
   useEffect(() => {
     const memosCollectionRef = collection(db, "memos");
     const q = query(memosCollectionRef, orderBy("createdAt"));
     const unsub = onSnapshot(q, (querySnapshot) => {
-      // docChange関数で追加、更新、削除で処理を分岐させる
       setMemoList(
         querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })),
       );
@@ -54,8 +47,6 @@ export default function MemoTable() {
     } catch (e) {
       console.error(e);
     }
-    // setMemoList([...memoList, newMemo]);
-    //     編集ステータスをオンにする
     setMemoId(newMemoId);
     setIsEditable(true);
   };
@@ -69,15 +60,6 @@ export default function MemoTable() {
     } catch (e) {
       console.error(e);
     }
-    // setMemoList(
-    //   memoList.map((memo) => {
-    //     if (memo.id === id) {
-    //       return { ...memo, content: text };
-    //     } else {
-    //       return memo;
-    //     }
-    //   }),
-    // );
   };
 
   const handleDeleteMemo = async (id) => {
@@ -87,9 +69,6 @@ export default function MemoTable() {
     } catch (e) {
       console.error(e);
     }
-    // setMemoList(memoList.filter((memo) => memo.id !== id));
-    // IDの値を初期化しないとバグる
-    // setMemoId(initialData.id);
   };
 
   return (
