@@ -54,21 +54,12 @@ export default function MemoTable() {
   const handleEditMemo = async (id, text) => {
     setIsEditable(false);
     try {
-      if (isWhitespace(text)) {
-        throw new Error("the content is empty!!");
-      } else {
-        await updateDoc(doc(db, "memos", id), {
-          content: text,
-        });
-      }
+      await updateDoc(doc(db, "memos", id), {
+        content: text,
+      });
     } catch (e) {
       console.error(e);
     }
-  };
-
-  const isWhitespace = (text) => {
-    const regex = /^\s*$/;
-    return regex.test(text);
   };
 
   const handleDeleteMemo = async (id) => {
@@ -88,7 +79,6 @@ export default function MemoTable() {
         onSelect={setMemoId}
         isEditable={setIsEditable}
         onAdd={handleAddMemo}
-        isWhitespace={isWhitespace}
       />
       {isEditable && (
         <MemoEditTable

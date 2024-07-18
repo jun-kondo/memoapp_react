@@ -1,13 +1,13 @@
-export default function MemoList({
-  memos,
-  onSelect,
-  isEditable,
-  onAdd,
-  isWhitespace,
-}) {
+export default function MemoList({ memos, onSelect, isEditable, onAdd }) {
   const title = (memo) => {
     return memo.content.split("\n").find((sentence) => !isWhitespace(sentence));
   };
+
+  const isWhitespace = (text) => {
+    const regex = /^\s*$/;
+    return regex.test(text);
+  };
+
   return (
     <section className="memo-list">
       <ul>
