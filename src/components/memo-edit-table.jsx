@@ -4,7 +4,11 @@ export default function MemoEditTable({ selectedMemo, onEdit, onDelete }) {
   const [text, setText] = useState(selectedMemo.content);
   return (
     <section className="edit-table">
-      <textarea value={text} onChange={(e) => setText(e.target.value)} />
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        required
+      />
       <br />
       <button
         onClick={() => {

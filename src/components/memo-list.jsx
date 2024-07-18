@@ -1,4 +1,13 @@
-export default function MemoList({ memos, onSelect, onEditable, onAdd }) {
+export default function MemoList({
+  memos,
+  onSelect,
+  isEditable,
+  onAdd,
+  isWhitespace,
+}) {
+  const title = (memo) => {
+    return memo.content.split("\n").find((sentence) => !isWhitespace(sentence));
+  };
   return (
     <section className="memo-list">
       <ul>
@@ -8,10 +17,10 @@ export default function MemoList({ memos, onSelect, onEditable, onAdd }) {
               href="#"
               onClick={() => {
                 onSelect(memo.id);
-                onEditable(true);
+                isEditable(true);
               }}
             >
-              {memo.content.split("\n")[0]}
+              {title(memo)}
             </a>
           </li>
         ))}
