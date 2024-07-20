@@ -14,19 +14,19 @@ export default function MemoEditTable({ selectedMemo, onEdit, onDelete }) {
   });
   const onsubmit = (data) => onEdit(selectedMemo.id, data.content);
   const onerror = (err) => console.error(err);
+
   return (
     <section className="edit-table">
       <form onSubmit={handleSubmit(onsubmit, onerror)}>
         <textarea
-          // id="content"
-          // type="text"
+          cols={30}
+          rows={10}
           {...register("content", {
             required: "必須入力です",
             validate: {
               emptyString: (value) => {
                 if (!value.match(/\S/g)) {
-                  // 空白文字以外をサーチ、一致するものがなければnull(空白文字のみ), それを反転してTrue
-                  return "please enter text";
+                  return "空文字列のみの入力は不可です";
                 }
               },
             },
