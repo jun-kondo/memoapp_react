@@ -1,5 +1,5 @@
-import MemoList from "./memo-list";
-import MemoEditTable from "./memo-edit-table";
+import MemoList from "./MemoList";
+import MemoEditTable from "./MemoEditTable";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "../firebase";

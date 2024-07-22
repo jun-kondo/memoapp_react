@@ -1,4 +1,4 @@
-import MemoTable from "./components/memo-table";
+import MemoTable from "./components/MemoTable";
 
 export default function App() {
   return (
