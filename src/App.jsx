@@ -1,9 +1,29 @@
 import { useState } from "react";
 import MemoApp from "./components/MemoApp";
-import LoginContent from "./components/LoginContent";
+import LoginContext from "./components/LoginContext";
 import LoginButton from "./LoginButton";
 
 export default function App() {
+  // プロバイダーに移動
+  // const [isLogin, setIsLogin] = useState(false);
+  // const loginConfig = {
+  //   isLogin,
+  //   toggleLogin: () => {
+  //     setIsLogin(!isLogin);
+  //   },
+  // };
+
+  return (
+    <>
+      <LoginProvider>
+        <LoginButton />
+        <MemoApp />
+      </LoginProvider>
+    </>
+  );
+}
+
+const LoginProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const loginConfig = {
     isLogin,
@@ -13,11 +33,8 @@ export default function App() {
   };
 
   return (
-    <>
-      <LoginContent.Provider value={loginConfig}>
-        <LoginButton />
-        <MemoApp />
-      </LoginContent.Provider>
-    </>
+    <LoginContext.Provider value={loginConfig}>
+      {children}
+    </LoginContext.Provider>
   );
-}
+};
