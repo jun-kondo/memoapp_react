@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import LoginContent from "./components/LoginContext";
+import { useLoginStatus } from "./hooks/LoginHook";
 
 export default function LoginButton() {
-  const { isLogin, toggleLogin } = useContext(LoginContent);
+  const { isLogin, toggleLogin } = useLoginStatus();
   return (
     <button onClick={toggleLogin}>{isLogin ? "ログアウト" : "ログイン"}</button>
   );

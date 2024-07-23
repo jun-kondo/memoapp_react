@@ -1,4 +1,7 @@
+import { useLoginStatus } from "../hooks/LoginHook";
+
 export default function MemoList({ memos, onSelect, onAdd }) {
+  const { isLogin } = useLoginStatus();
   const title = (content) => {
     return content.split("\n").find((sentence) => !isWhitespace(sentence));
   };
@@ -23,16 +26,18 @@ export default function MemoList({ memos, onSelect, onAdd }) {
             </a>
           </li>
         ))}
-        <li>
-          <a
-            href="#"
-            onClick={() => {
-              onAdd();
-            }}
-          >
-            +
-          </a>
-        </li>
+        {isLogin && (
+          <li>
+            <a
+              href="#"
+              onClick={() => {
+                onAdd();
+              }}
+            >
+              +
+            </a>
+          </li>
+        )}
       </ul>
     </section>
   );
