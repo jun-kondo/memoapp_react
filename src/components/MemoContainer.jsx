@@ -64,12 +64,10 @@ export default function MemoContainer() {
     return newMemoId;
   };
 
-  const handleEditMemo = async (id, text) => {
+  const handleEditMemo = async ({ id, ...rest }) => {
     setSelectedMemo(null);
     try {
-      await updateDoc(doc(db, "memos", id), {
-        content: text,
-      });
+      await updateDoc(doc(db, "memos", id), rest);
     } catch (e) {
       console.error(e);
     }

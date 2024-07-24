@@ -12,7 +12,7 @@ export default function MemoDetail({ selectedMemo, onEdit, onDelete }) {
     defaultValues,
     mode: "onChange",
   });
-  const onsubmit = (data) => onEdit(selectedMemo.id, data.content);
+  const onsubmit = (data) => onEdit({ ...selectedMemo, content: data.content });
   const onerror = (err) => console.error(err);
 
   return (
