@@ -18,7 +18,6 @@ export default function MemoContainer() {
   const [memoList, setMemoList] = useState([]);
   const [selectedMemo, setSelectedMemo] = useState(null);
   const [newMemoId, setNewMemoId] = useState(null);
-  console.log(selectedMemo);
 
   useEffect(() => {
     const memosCollectionRef = collection(db, "memos");
@@ -66,7 +65,7 @@ export default function MemoContainer() {
   };
 
   const handleEditMemo = async (id, text) => {
-    setIsEditable(false);
+    setSelectedMemo(null);
     try {
       await updateDoc(doc(db, "memos", id), {
         content: text,
@@ -77,7 +76,7 @@ export default function MemoContainer() {
   };
 
   const handleDeleteMemo = async (id) => {
-    setIsEditable(false);
+    setSelectedMemo(null);
     try {
       await deleteDoc(doc(db, "memos", id));
     } catch (e) {
@@ -87,7 +86,7 @@ export default function MemoContainer() {
 
   return (
     <>
-      <h1>{isEditable ? "編集" : "一覧"}</h1>
+      <h1>{selectedMemo ? "編集" : "一覧"}</h1>
       <MemoList
         memos={memoList}
         onSelect={(memoId) => {
@@ -95,7 +94,7 @@ export default function MemoContainer() {
         }}
         onAdd={handleAddMemo}
       />
-      {isEditable && (
+      {selectedMemo && (
         <MemoDetail
           key={selectedMemo.id}
           selectedMemo={selectedMemo}
