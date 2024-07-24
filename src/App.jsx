@@ -1,9 +1,9 @@
-import MemoTable from "./components/MemoTable";
+import MemoContainer from "./components/MemoContainer";
 
 export default function App() {
   return (
     <>
-      <MemoTable />
+      <MemoContainer />
     </>
   );
 }

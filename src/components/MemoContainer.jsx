@@ -1,5 +1,5 @@
 import MemoList from "./MemoList";
-import MemoEditTable from "./MemoEditTable";
+import MemoDetail from "./MemoDetail";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "../firebase";
@@ -14,7 +14,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-export default function MemoTable() {
+export default function MemoContainer() {
   const [memoList, setMemoList] = useState([]);
   const [memoId, setMemoId] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
@@ -81,7 +81,7 @@ export default function MemoTable() {
         onAdd={handleAddMemo}
       />
       {isEditable && (
-        <MemoEditTable
+        <MemoDetail
           key={memoId}
           selectedMemo={selectedMemo}
           onEdit={handleEditMemo}
