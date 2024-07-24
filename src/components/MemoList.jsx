@@ -1,4 +1,4 @@
-export default function MemoList({ memos, onSelect, isEditable, onAdd }) {
+export default function MemoList({ memos, onSelect, onAdd }) {
   const title = (content) => {
     return content.split("\n").find((sentence) => !isWhitespace(sentence));
   };
@@ -17,7 +17,6 @@ export default function MemoList({ memos, onSelect, isEditable, onAdd }) {
               href="#"
               onClick={() => {
                 onSelect(id);
-                // isEditable(true);
               }}
             >
               {title(content)}
