@@ -16,9 +16,9 @@ import {
 
 export default function MemoContainer() {
   const [memoList, setMemoList] = useState([]);
-  const [memoId, setMemoId] = useState(null);
-  const [isEditable, setIsEditable] = useState(false);
-  const selectedMemo = memoList.find((memo) => memo.id === memoId);
+  const [selectedMemo, setSelectedMemo] = useState(null);
+  const [newMemoId, setNewMemoId] = useState(null);
+  console.log(selectedMemo);
 
   useEffect(() => {
     const memosCollectionRef = collection(db, "memos");
@@ -33,7 +33,22 @@ export default function MemoContainer() {
     };
   }, []);
 
+  useEffect(() => {
+    if (newMemoId) {
+      const newMemo = memoList.find((memo) => memo.id === newMemoId);
+      if (newMemo) {
+        setSelectedMemo(newMemo);
+        setNewMemoId(null);
+      }
+    }
+  }, [memoList, newMemoId]);
+
   const handleAddMemo = async () => {
+    const newMemoId = await generateNewMemo();
+    setNewMemoId(newMemoId);
+  };
+
+  const generateNewMemo = async () => {
     const newMemoId = uuidv4();
     try {
       await setDoc(
@@ -47,8 +62,7 @@ export default function MemoContainer() {
     } catch (e) {
       console.error(e);
     }
-    setMemoId(newMemoId);
-    setIsEditable(true);
+    return newMemoId;
   };
 
   const handleEditMemo = async (id, text) => {
@@ -76,13 +90,14 @@ export default function MemoContainer() {
       <h1>{isEditable ? "編集" : "一覧"}</h1>
       <MemoList
         memos={memoList}
-        onSelect={setMemoId}
-        isEditable={setIsEditable}
+        onSelect={(memoId) => {
+          setSelectedMemo(memoList.find((memo) => memo.id === memoId));
+        }}
         onAdd={handleAddMemo}
       />
       {isEditable && (
         <MemoDetail
-          key={memoId}
+          key={selectedMemo.id}
           selectedMemo={selectedMemo}
           onEdit={handleEditMemo}
           onDelete={handleDeleteMemo}
