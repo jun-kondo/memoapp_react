@@ -1,6 +1,6 @@
 export default function MemoList({ memos, onSelect, isEditable, onAdd }) {
-  const title = (memo) => {
-    return memo.content.split("\n").find((sentence) => !isWhitespace(sentence));
+  const title = (content) => {
+    return content.split("\n").find((sentence) => !isWhitespace(sentence));
   };
 
   const isWhitespace = (text) => {
@@ -11,16 +11,16 @@ export default function MemoList({ memos, onSelect, isEditable, onAdd }) {
   return (
     <section className="memo-list">
       <ul>
-        {memos.map((memo) => (
-          <li key={memo.id}>
+        {memos.map(({ id, content }) => (
+          <li key={id}>
             <a
               href="#"
               onClick={() => {
-                onSelect(memo.id);
-                isEditable(true);
+                onSelect(id);
+                // isEditable(true);
               }}
             >
-              {title(memo)}
+              {title(content)}
             </a>
           </li>
         ))}
