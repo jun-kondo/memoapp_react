@@ -41,11 +41,6 @@ const useMemos = () => {
   }, [memoList, newMemoId]);
 
   const handleAddMemo = async () => {
-    const newMemoId = await generateNewMemo();
-    setNewMemoId(newMemoId);
-  };
-
-  const generateNewMemo = async () => {
     const newMemoId = uuidv4();
     try {
       await setDoc(
@@ -59,7 +54,7 @@ const useMemos = () => {
     } catch (e) {
       console.error(e);
     }
-    return newMemoId;
+    setNewMemoId(newMemoId);
   };
 
   const handleEditMemo = async ({ id, ...rest }) => {
