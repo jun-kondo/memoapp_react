@@ -1,8 +1,8 @@
 import MemoList from "./MemoList";
-import MemoDetail from "./MemoDetail";
+import MemoForm from "./MemoForm";
 import useMemos from "../hooks/useMemos";
 
-export default function MemoContainer() {
+export default function MemoApp() {
   const {
     selectedMemo,
     setSelectedMemo,
@@ -22,7 +22,7 @@ export default function MemoContainer() {
         onAdd={handleAddMemo}
       />
       {selectedMemo && (
-        <MemoDetail
+        <MemoForm
           key={selectedMemo.id}
           selectedMemo={selectedMemo}
           onEdit={handleEditMemo}

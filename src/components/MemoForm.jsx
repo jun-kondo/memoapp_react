@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-export default function MemoDetail({ selectedMemo, onEdit, onDelete }) {
+export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
   const defaultValues = {
     content: selectedMemo.content,
   };
