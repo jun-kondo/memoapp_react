@@ -1,4 +1,4 @@
-import { useLoginConfig } from "../hooks/LoginHook";
+import useLoginConfig from "../hooks/useLoginConfig";
 
 export default function MemoList({ memos, onSelect, onAdd }) {
   const { isLogin } = useLoginConfig();

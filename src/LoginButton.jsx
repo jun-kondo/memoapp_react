@@ -1,4 +1,4 @@
-import { useLoginConfig } from "./hooks/LoginHook";
+import useLoginConfig from "./hooks/useLoginConfig";
 
 export default function LoginButton() {
   const { isLogin, toggleLogin } = useLoginConfig();
