@@ -19,4 +19,4 @@ export const LoginProvider = ({ children }) => {
   );
 };
 
-export const useLoginStatus = () => useContext(LoginContext);
+export const useLoginConfig = () => useContext(LoginContext);

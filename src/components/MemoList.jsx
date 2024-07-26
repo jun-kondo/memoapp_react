@@ -1,7 +1,7 @@
-import { useLoginStatus } from "../hooks/LoginHook";
+import { useLoginConfig } from "../hooks/LoginHook";
 
 export default function MemoList({ memos, onSelect, onAdd }) {
-  const { isLogin } = useLoginStatus();
+  const { isLogin } = useLoginConfig();
   const title = (content) => {
     return content.split("\n").find((sentence) => !isWhitespace(sentence));
   };

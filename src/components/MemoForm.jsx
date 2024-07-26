@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useLoginStatus } from "../hooks/LoginHook";
+import { useLoginConfig } from "../hooks/LoginHook";
 
 export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
-  const { isLogin } = useLoginStatus();
+  const { isLogin } = useLoginConfig();
   const defaultValues = {
     content: selectedMemo.content,
   };
