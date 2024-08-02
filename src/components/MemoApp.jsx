@@ -15,8 +15,8 @@ export default function MemoApp() {
   const { isLoggedIn } = useLoginConfig();
   return (
     <>
-      <h1>{isLoggedIn ? "ログイン中" : "未ログイン"}</h1>
-      <h2>{isLoggedIn && (selectedMemo ? "編集" : "一覧")}</h2>
+      <p>{isLoggedIn ? "ログイン中" : "未ログイン"}</p>
+      <p>{isLoggedIn && (selectedMemo ? "編集" : "一覧")}</p>
       <MemoList
         memos={memoList}
         onSelect={(memoId) => {
