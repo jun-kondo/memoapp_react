@@ -1,7 +1,7 @@
 import useLoginConfig from "../hooks/useLoginConfig";
 
 export default function MemoList({ memos, onSelect, onAdd }) {
-  const { isLogin } = useLoginConfig();
+  const { isLoggedIn } = useLoginConfig();
   const title = (content) => {
     return content.split("\n").find((sentence) => !isWhitespace(sentence));
   };
@@ -26,7 +26,7 @@ export default function MemoList({ memos, onSelect, onAdd }) {
             </a>
           </li>
         ))}
-        {isLogin && (
+        {isLoggedIn && (
           <li>
             <a
               href="#"

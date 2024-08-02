@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import useLoginConfig from "../hooks/useLoginConfig";
 
 export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
-  const { isLogin } = useLoginConfig();
+  const { isLoggedIn } = useLoginConfig();
   const defaultValues = {
     content: selectedMemo.content,
   };
@@ -23,7 +23,7 @@ export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
         <textarea
           cols={30}
           rows={10}
-          disabled={!isLogin}
+          disabled={!isLoggedIn}
           {...register("content", {
             required: "必須入力です",
             validate: {
@@ -36,7 +36,7 @@ export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
           })}
         />
         <br />
-        {isLogin && (
+        {isLoggedIn && (
           <div className="button">
             <button type="submit" disabled={!isDirty || !isValid}>
               編集

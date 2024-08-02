@@ -12,11 +12,11 @@ export default function MemoApp() {
     handleEditMemo,
     handleDeleteMemo,
   } = useMemos();
-  const { isLogin } = useLoginConfig();
+  const { isLoggedIn } = useLoginConfig();
   return (
     <>
-      <h1>{isLogin ? "ログイン中" : "未ログイン"}</h1>
-      <h2>{isLogin && (selectedMemo ? "編集" : "一覧")}</h2>
+      <h1>{isLoggedIn ? "ログイン中" : "未ログイン"}</h1>
+      <h2>{isLoggedIn && (selectedMemo ? "編集" : "一覧")}</h2>
       <MemoList
         memos={memoList}
         onSelect={(memoId) => {
