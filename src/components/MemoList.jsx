@@ -27,16 +27,13 @@ export default function MemoList({ memos, onSelect, onAdd }) {
           </li>
         ))}
         {isLoggedIn && (
-          <li>
-            <a
-              href="#"
-              onClick={() => {
-                onAdd();
-              }}
-            >
-              +
-            </a>
-          </li>
+          <button
+            onClick={() => {
+              onAdd();
+            }}
+          >
+            +
+          </button>
         )}
       </ul>
     </section>
