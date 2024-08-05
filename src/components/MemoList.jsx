@@ -16,14 +16,14 @@ export default function MemoList({ memos, onSelect, onAdd }) {
         <AddMemoButton onAdd={onAdd} />
         {memos.map(({ id, content }) => (
           <li key={id}>
-            <a
-              href="#"
+            <div
+              className="memo-item"
               onClick={() => {
                 onSelect(id);
               }}
             >
               {title(content)}
-            </a>
+            </div>
           </li>
         ))}
       </ul>

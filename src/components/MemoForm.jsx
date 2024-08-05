@@ -21,8 +21,7 @@ export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
     <section className="edit-table">
       <form onSubmit={handleSubmit(onsubmit, onerror)}>
         <textarea
-          cols={30}
-          rows={10}
+          rows={20}
           disabled={!isLoggedIn}
           {...register("content", {
             required: "必須入力です",
@@ -37,8 +36,12 @@ export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
         />
         <br />
         {isLoggedIn && (
-          <div className="button">
-            <button type="submit" disabled={!isDirty || !isValid}>
+          <div className="button-container">
+            <button
+              className="edit-button"
+              type="submit"
+              disabled={!isDirty || !isValid}
+            >
               編集
             </button>
             <button
