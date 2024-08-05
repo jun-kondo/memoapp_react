@@ -1,3 +1,5 @@
+import AddMemoButton from "./AddMemoButton";
+
 export default function MemoList({ memos, onSelect, onAdd }) {
   const title = (content) => {
     return content.split("\n").find((sentence) => !isWhitespace(sentence));
@@ -13,26 +15,16 @@ export default function MemoList({ memos, onSelect, onAdd }) {
       <ul>
         {memos.map(({ id, content }) => (
           <li key={id}>
-            <a
-              href="#"
+            <div
+              className="memo-item"
               onClick={() => {
                 onSelect(id);
               }}
             >
               {title(content)}
-            </a>
+            </div>
           </li>
         ))}
-        <li>
-          <a
-            href="#"
-            onClick={() => {
-              onAdd();
-            }}
-          >
-            +
-          </a>
-        </li>
       </ul>
     </section>
   );

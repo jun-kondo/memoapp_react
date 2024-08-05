@@ -1,0 +1,67 @@
+@charset "UTF-8";
+header {
+  display: flex;
+  justify-content: space-between;
+}
+.header-container {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+.app-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+}
+.header-item {
+  margin: 10px;
+  padding: 10px;
+}
+main {
+  display: flex;
+  height: 100%;
+}
+section {
+  width: 50%;
+  margin: 10px;
+  padding: 10px;
+}
+.add-memo-button {
+  font-size: 14px;
+  color: blue;
+  cursor: pointer;
+  margin: 7px;
+  padding: 7px;
+  text-decoration: underline;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  font-size: 14px;
+  color: blue;
+  cursor: pointer;
+  margin: 7px;
+  padding: 7px;
+  text-decoration: underline;
+}
+.memo-list {
+  width: 40%;
+}
+.edit-table {
+  width: 60%;
+}
+textarea {
+  border: 2px solid #cccccc;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 16px;
+}
+.button-container {
+  display: flex;
+}
+.edit-button {
+  margin-right: 10px;
+  width: 100px;
+}

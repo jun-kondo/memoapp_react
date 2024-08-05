@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
+import useLoginConfig from "../hooks/useLoginConfig";
 
 export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
+  const { isLoggedIn } = useLoginConfig();
   const defaultValues = {
     content: selectedMemo.content,
   };
@@ -19,8 +21,8 @@ export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
     <section className="edit-table">
       <form onSubmit={handleSubmit(onsubmit, onerror)}>
         <textarea
-          cols={30}
-          rows={10}
+          rows={20}
+          disabled={!isLoggedIn}
           {...register("content", {
             required: "必須入力です",
             validate: {
@@ -33,16 +35,24 @@ export default function MemoForm({ selectedMemo, onEdit, onDelete }) {
           })}
         />
         <br />
-        <button type="submit" disabled={!isDirty || !isValid}>
-          編集
-        </button>
-        <button
-          onClick={() => {
-            onDelete(selectedMemo.id);
-          }}
-        >
-          削除
-        </button>
+        {isLoggedIn && (
+          <div className="button-container">
+            <button
+              className="edit-button"
+              type="submit"
+              disabled={!isDirty || !isValid}
+            >
+              編集
+            </button>
+            <button
+              onClick={() => {
+                onDelete(selectedMemo.id);
+              }}
+            >
+              削除
+            </button>
+          </div>
+        )}
       </form>
       {errors.content?.message && (
         <p className="error-message" style={{ color: "red" }}>
