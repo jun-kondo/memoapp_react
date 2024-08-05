@@ -1,7 +1,6 @@
-import useLoginConfig from "../hooks/useLoginConfig";
+import AddMemoButton from "./AddMemoButton";
 
 export default function MemoList({ memos, onSelect, onAdd }) {
-  const { isLoggedIn } = useLoginConfig();
   const title = (content) => {
     return content.split("\n").find((sentence) => !isWhitespace(sentence));
   };
@@ -14,6 +13,7 @@ export default function MemoList({ memos, onSelect, onAdd }) {
   return (
     <section className="memo-list">
       <ul>
+        <AddMemoButton onAdd={onAdd} />
         {memos.map(({ id, content }) => (
           <li key={id}>
             <a
@@ -26,15 +26,6 @@ export default function MemoList({ memos, onSelect, onAdd }) {
             </a>
           </li>
         ))}
-        {isLoggedIn && (
-          <button
-            onClick={() => {
-              onAdd();
-            }}
-          >
-            +
-          </button>
-        )}
       </ul>
     </section>
   );
