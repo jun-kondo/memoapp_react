@@ -13,8 +13,6 @@ export const LoginProvider = ({ children }) => {
   };
 
   return (
-    <LoginContext.Provider value={loginState}>
-      {children}
-    </LoginContext.Provider>
+    <LoginContext.Provider value={loginState}>{children}</LoginContext.Provider>
   );
 };
