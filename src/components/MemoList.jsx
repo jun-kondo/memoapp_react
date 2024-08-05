@@ -13,7 +13,6 @@ export default function MemoList({ memos, onSelect, onAdd }) {
   return (
     <section className="memo-list">
       <ul>
-        <AddMemoButton onAdd={onAdd} />
         {memos.map(({ id, content }) => (
           <li key={id}>
             <div
